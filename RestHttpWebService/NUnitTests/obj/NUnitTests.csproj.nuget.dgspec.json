@@ -1,0 +1,73 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Lucian\\Desktop\\swe\\REST-HTTP-Server\\RestHttpWebService\\NUnitTests\\NUnitTests.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Lucian\\Desktop\\swe\\REST-HTTP-Server\\RestHttpWebService\\NUnitTests\\NUnitTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Lucian\\Desktop\\swe\\REST-HTTP-Server\\RestHttpWebService\\NUnitTests\\NUnitTests.csproj",
+        "projectName": "NUnitTests",
+        "projectPath": "C:\\Users\\Lucian\\Desktop\\swe\\REST-HTTP-Server\\RestHttpWebService\\NUnitTests\\NUnitTests.csproj",
+        "packagesPath": "C:\\Users\\Lucian\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Lucian\\Desktop\\swe\\REST-HTTP-Server\\RestHttpWebService\\NUnitTests\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Lucian\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "projectReferences": {
+              "C:\\Users\\Lucian\\Desktop\\swe\\REST-HTTP-Server\\RestHttpWebService\\RestHttpWebService\\RestHttpWebService.csproj": {
+                "projectPath": "C:\\Users\\Lucian\\Desktop\\swe\\REST-HTTP-Server\\RestHttpWebService\\RestHttpWebService\\RestHttpWebService.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.7.1, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.12.0, )"
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[3.17.0, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Lucian\\Desktop\\swe\\REST-HTTP-Server\\RestHttpWebService\\RestHttpWebService\\RestHttpWebService.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Lucian\\Desktop\\swe\\REST-HTTP-Server\\RestHttpWebService\\RestHttpWebService\\RestHttpWebService.csproj",
+        "projectName": "RestHttpWebService",
+        "projectPath": "C:\\Users\\Lucian\\Desktop\\swe\\REST-HTTP-Server\\RestHttpWebService\\RestHttpWebService\\RestHttpWebService.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    }
+  }
+}

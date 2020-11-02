@@ -1,0 +1,11 @@
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\bin\Debug\net4.0\NUnitTests.dll
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\obj\Debug\net4.0\NUnitTests.csprojAssemblyReference.cache
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\obj\Debug\net4.0\NUnitTests.AssemblyInfoInputs.cache
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\obj\Debug\net4.0\NUnitTests.AssemblyInfo.cs
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\bin\Debug\net4.0\nunit.framework.dll
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\obj\Debug\net4.0\NUnitTests.csproj.CopyComplete
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\bin\Debug\net4.0\NUnit3.TestAdapter.dll
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\bin\Debug\net4.0\NUnit3.TestAdapter.pdb
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\bin\Debug\net4.0\nunit.engine.dll
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\bin\Debug\net4.0\nunit.engine.api.dll
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\bin\Debug\net4.0\nunit.engine.core.dll

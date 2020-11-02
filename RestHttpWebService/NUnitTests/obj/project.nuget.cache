@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "KC/P/6q3XLISleqEbDTC1bgiN/rxAi8vJoaesBAQtSRHEo8XLmvmI7v4pM44txrh3N7gEL9eKyeFvRUNsuH5Uw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Lucian\\Desktop\\swe\\REST-HTTP-Server\\RestHttpWebService\\NUnitTests\\NUnitTests.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Lucian\\.nuget\\packages\\microsoft.codecoverage\\16.7.1\\microsoft.codecoverage.16.7.1.nupkg.sha512",
+    "C:\\Users\\Lucian\\.nuget\\packages\\microsoft.net.test.sdk\\16.7.1\\microsoft.net.test.sdk.16.7.1.nupkg.sha512",
+    "C:\\Users\\Lucian\\.nuget\\packages\\nunit\\3.12.0\\nunit.3.12.0.nupkg.sha512",
+    "C:\\Users\\Lucian\\.nuget\\packages\\nunit3testadapter\\3.17.0\\nunit3testadapter.3.17.0.nupkg.sha512"
+  ],
+  "logs": []
+}
