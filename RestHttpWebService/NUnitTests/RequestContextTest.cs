@@ -17,7 +17,7 @@ namespace NUnitTests
 
         [Test]
         [Category("pass")]
-        [TestCase("POST /messages/1 HTTP/1.1\nHOST: LOCALHOST:13000\nUSER-AGENT: CURL/7.55.1\nACCEPT: */*\nCONTENT-LENGTH: 23\nCONTENT-TYPE: APPLICATION/X-WWW-FORM-URLENCODED\n\nthe payload is here")]
+        [TestCase("POST /messages/1 HTTP/1.1\nHOST: LOCALHOST:13000\nUSER-AGENT: CURL/7.55.1\nACCEPT: */*\nCONTENT-LENGTH: 23\nCONTENT-TYPE: APPLICATION/X-WWW-FORM-URLENCODED\n\r\nthe payload is here")]
         public void ReadContextTest(string data)
         {
             //act

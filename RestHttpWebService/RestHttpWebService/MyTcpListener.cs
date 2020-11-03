@@ -60,7 +60,9 @@ namespace RestHttpWebService
                         Console.WriteLine("\nresourceID: {0}", context.resourceID);
                         Console.WriteLine("\nhttpVersion: {0}", context.httpVersion);
                         Console.WriteLine("\nhttpPayLoad: {0}", context.payload);
+                        
                         Console.WriteLine("\nReceived: {0}", data);
+
 
                         //Process the data sent by the client.
                         //data = data.ToUpper();
