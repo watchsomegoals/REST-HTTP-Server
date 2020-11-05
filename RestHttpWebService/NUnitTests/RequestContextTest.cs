@@ -26,7 +26,7 @@ namespace NUnitTests
             Assert.AreEqual("POST", context.httpVerb);
             Assert.AreEqual("messages", context.dirName);
             Assert.AreEqual("1", context.resourceID);
-            Assert.AreEqual("HTTP/1.1", context.httpVersion);
+            Assert.AreEqual("HTTP/1.1", context.protocol);
             Assert.AreEqual("the payload is here", context.payload);
         }
     }

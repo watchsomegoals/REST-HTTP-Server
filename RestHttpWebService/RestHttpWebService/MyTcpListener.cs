@@ -40,7 +40,7 @@ namespace RestHttpWebService
                     // Perform a blocking call to accept requests
                     // You could also use server.AcceptTcpClient();
                     TcpClient client = server.AcceptTcpClient();
-                    Console.WriteLine("Connected!");
+                    Console.WriteLine("Connected!\n");
 
                     data = null;
 
@@ -55,14 +55,9 @@ namespace RestHttpWebService
                         //Translate data bytes to a ASCII string.
                         data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                         context.ReadContext(data);
-                        Console.WriteLine("\nhttpVerb: {0}", context.httpVerb);
-                        Console.WriteLine("\ndirName: {0}", context.dirName);
-                        Console.WriteLine("\nresourceID: {0}", context.resourceID);
-                        Console.WriteLine("\nhttpVersion: {0}", context.httpVersion);
-                        Console.WriteLine("\nhttpPayLoad: {0}", context.payload);
+                        context.HandleRequest();
                         
-                        Console.WriteLine("\nReceived: {0}", data);
-
+                        //Console.WriteLine("\nReceived: {0}", data);
 
                         //Process the data sent by the client.
                         //data = data.ToUpper();
@@ -71,7 +66,11 @@ namespace RestHttpWebService
 
                         //Send back a response.
                         stream.Write(msg, 0, msg.Length);
-                        Console.WriteLine("Sent: {0}", data);
+                        //Console.WriteLine("Sent: {0}", data);
+                        if (!stream.DataAvailable)
+                        {
+                            break;
+                        }
                     }
 
                     // Shutdown and end connection
