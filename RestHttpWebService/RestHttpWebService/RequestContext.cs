@@ -25,118 +25,71 @@ namespace RestHttpWebService
 
         public void ReadContext(string data)
         {
+            httpVerb = null;
+            dirName = null;
+            resourceID = null;
+            protocol = null;
+            payload = null;
+
+            if(headerData.Count() != 0)
+            {
+                headerData.Clear();
+            }
+
+            string[] head;
+            string[] resources;
             string[] lines = data.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-
-            this.httpVerb = lines[0].Substring(0, data.IndexOf("/") - 1);
-
-            //s1 string from dir name onwards POST /message/1 HTTP/1.1 --> message/1 HTTP/1.1
-            string s1 = lines[0].Substring(data.IndexOf("/") + 1);
-            this.protocol = s1.Substring(s1.IndexOf(" ") + 1);
-
-            //messages/1 HTTP/1.1 --> messages/1
-            s1 = s1.Substring(0, s1.IndexOf(" "));
-            if(s1.IndexOf("/") == -1)
+            string[] firstLine;
+            if (lines.Length > 1)
             {
-                this.dirName = s1;
-                this.resourceID = null;
-            }else
-            {
-                this.dirName = s1.Substring(0, s1.IndexOf("/"));
-                this.resourceID = s1.Substring(s1.IndexOf("/") + 1);
-            }
-
-            //Adding host KeyValuePair
-            string host = lines[1].Substring(lines[1].IndexOf(" ") + 1);
-            if (headerData.ContainsKey("Host"))
-            {
-                headerData["Host"] = host;
-            }
-            else
-            {
-                headerData.Add("Host", host);
-            }
-            //Adding agent KeyValuePair
-            string agent = lines[2].Substring(lines[2].IndexOf(" ") + 1);
-            if (headerData.ContainsKey("User-Agent"))
-            {
-                headerData["User-Agent"] = agent;
-            }
-            else
-            {
-                headerData.Add("User-Agent", agent);
-            }
-            //Adding accept KeyValuePair
-            string accept = lines[3].Substring(lines[3].IndexOf(" ") + 1);
-            if (headerData.ContainsKey("Accept"))
-            {
-                headerData["Accept"] = accept;
-            }
-            else
-            {
-                headerData.Add("Accept", accept);
-            }
-
-            if (httpVerb == "POST" || httpVerb == "PUT")
-            {
-                //Adding content-length KeyValuePair
-                string conLen = lines[4].Substring(lines[4].IndexOf(" ") + 1);
-                if (headerData.ContainsKey("Content-Length"))
+                firstLine = lines[0].Split(new string[] { " " }, StringSplitOptions.None);
+                if (firstLine.Length > 1)
                 {
-                    headerData["Content-Length"] = conLen;
-                }
-                else
-                {
-                    headerData.Add("Content-Length", conLen);
-                }
-                //Adding content-type KeyValuePair
-                string conType = lines[5].Substring(lines[5].IndexOf(" ") + 1);
-                if (headerData.ContainsKey("Content-Type"))
-                {
-                    headerData["Content-Type"] = conType;
-                }
-                else
-                {
-                    headerData.Add("Content-Type", conType);
-                }
-                //Getting the payload 
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    if (lines[i] == "")
+                    this.httpVerb = firstLine[0];
+                    resources = firstLine[1].Split(new string[] { "/" }, StringSplitOptions.None);
+                    if (resources.Length == 2)
                     {
-                        this.payload = lines[i + 1];
+                        this.dirName = resources[1];
                     }
-                }
-            }
-            else if (httpVerb == "GET" || httpVerb == "DELETE")
-            {
-                foreach (KeyValuePair<string, string> kvp in headerData)
-                {
-                    if (kvp.Key == "Content-Length")
+                    else if (resources.Length == 3)
                     {
-                        headerData.Remove(kvp.Key);
-                        break;
+                        this.dirName = resources[1];
+                        this.resourceID = resources[2];
                     }
-                }
-                foreach (KeyValuePair<string, string> kvp in headerData)
-                {
-                    if (kvp.Key == "Content-Type")
+                    this.protocol = firstLine[2];
+                    if (httpVerb == "POST" || httpVerb == "PUT")
                     {
-                        headerData.Remove(kvp.Key);
-                        break;
+                        //Getting the payload 
+                        for (int i = 0; i < lines.Length; i++)
+                        {
+                            if (lines[i] == "")
+                            { 
+                                this.payload = lines[i + 1];
+                            }
+                        }
                     }
+                    for(int i = 1; i < lines.Length; i++)
+                    {
+                        if (lines[i] == "")
+                        {
+                            break;
+                        }
+                        head = lines[i].Split(new string[] { ": " }, StringSplitOptions.None);
+                        headerData.Add(head[0], head[1]);
+                    }
+                    foreach (KeyValuePair<string, string> kvp in headerData)
+                    {
+                        Console.WriteLine("Key: {0}, Value: {1}", kvp.Key, kvp.Value);
+                    }
+                    Console.WriteLine("\n");
+                    Console.WriteLine("httpVerb: {0}", this.httpVerb);
+                    Console.WriteLine("dirName: {0}", this.dirName);
+                    Console.WriteLine("resourceID: {0}", this.resourceID);
+                    Console.WriteLine("protocol: {0}", this.protocol);
+                    Console.WriteLine("httpPayLoad: {0}\n", this.payload);
                 }
+                
             }
-            
-            //Logging the information to the console window
-            foreach (KeyValuePair<string, string> kvp in headerData)
-            {
-                Console.WriteLine("Key: {0}, Value: {1}", kvp.Key, kvp.Value);
-            }
-            Console.WriteLine("httpVerb: {0}", this.httpVerb);
-            Console.WriteLine("dirName: {0}", this.dirName);
-            Console.WriteLine("resourceID: {0}", this.resourceID);
-            Console.WriteLine("protocol: {0}", this.protocol);
-            Console.WriteLine("httpPayLoad: {0}\n", this.payload);
         }
 
         public void HandleRequest()
@@ -234,7 +187,6 @@ namespace RestHttpWebService
                     Delete();
                 }
             }
-            //Console.WriteLine(statusCode + "\n" + reasonPhrase + "\n" + responseID + "\n" + responseBody);
         }
 
         private void Delete()
@@ -390,7 +342,6 @@ namespace RestHttpWebService
             }
             else
             {
-                //Console.WriteLine("Text File exists already");
                 counter++;
                 fileName = counter.ToString();
                 responseBody = "\n" + fileName;
