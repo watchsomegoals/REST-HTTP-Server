@@ -29,8 +29,8 @@ namespace RestHttpWebService
                 server.Start();
 
                 // Buffer for reading data
-                Byte[] bytes = new Byte[256];
-                String data = null;
+                byte[] bytes = new byte[256];
+                string data = null;
 
                 //Enter the listening loop.
                 while(true)
@@ -56,23 +56,20 @@ namespace RestHttpWebService
                         data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
                         context.ReadContext(data);
                         context.HandleRequest();
-                        
-                        //Console.WriteLine("\nReceived: {0}", data);
 
-                        //Process the data sent by the client.
-                        //data = data.ToUpper();
+                        data = context.ComposeResponse();
+                        Console.WriteLine(data);
 
                         byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
 
                         //Send back a response.
                         stream.Write(msg, 0, msg.Length);
-                        //Console.WriteLine("Sent: {0}", data);
+                     
                         if (!stream.DataAvailable)
                         {
                             break;
                         }
                     }
-
                     // Shutdown and end connection
                     client.Close();
                 }

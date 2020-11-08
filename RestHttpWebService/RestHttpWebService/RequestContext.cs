@@ -10,23 +10,22 @@ namespace RestHttpWebService
 {
     public class RequestContext
     {
-        public string httpVerb = null;
-        public string dirName = null;
-        public string resourceID = null;
-        public string protocol = null;
-        public string payload = null;
+        public string httpVerb;
+        public string dirName;
+        public string resourceID;
+        public string protocol;
+        public string payload;
         public IDictionary<string, string> headerData = new Dictionary<string, string>();
 
         public string statusCode = null;
         public string reasonPhrase = null;
-        public string responseID = null;
         public string responseBody = null;
 
         public RequestContext() { }
 
         public void ReadContext(string data)
         {
-            string[] lines = data.Split(new string[] { "\n" }, StringSplitOptions.None);
+            string[] lines = data.Split(new string[] { "\r\n" }, StringSplitOptions.None);
 
             this.httpVerb = lines[0].Substring(0, data.IndexOf("/") - 1);
 
@@ -99,6 +98,14 @@ namespace RestHttpWebService
                 {
                     headerData.Add("Content-Type", conType);
                 }
+                //Getting the payload 
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (lines[i] == "")
+                    {
+                        this.payload = lines[i + 1];
+                    }
+                }
             }
             else if (httpVerb == "GET" || httpVerb == "DELETE")
             {
@@ -118,17 +125,8 @@ namespace RestHttpWebService
                         break;
                     }
                 }
-
-            //Getting the payload 
             }
-            for(int i = 0; i < lines.Length; i++)
-            {   
-                if(lines[i] == "\r")
-                {
-                    this.payload = lines[i + 1];
-                }
-            }
-
+            
             //Logging the information to the console window
             foreach (KeyValuePair<string, string> kvp in headerData)
             {
@@ -138,21 +136,27 @@ namespace RestHttpWebService
             Console.WriteLine("dirName: {0}", this.dirName);
             Console.WriteLine("resourceID: {0}", this.resourceID);
             Console.WriteLine("protocol: {0}", this.protocol);
-            Console.WriteLine("httpPayLoad: {0}", this.payload);
+            Console.WriteLine("httpPayLoad: {0}\n", this.payload);
         }
 
         public void HandleRequest()
         {
+            statusCode = null;
+            reasonPhrase = null;
+            responseBody = null;
+
             if (string.Compare(httpVerb, "GET") != 0 && string.Compare(httpVerb, "POST") != 0 &&
                string.Compare(httpVerb, "PUT") != 0 && string.Compare(httpVerb, "DELETE") != 0)
             {
                 statusCode = "501";
                 reasonPhrase = "Not Implemented";
+                responseBody = "\nRequest Not Implemented\n";
             }
-            else if (string.Compare(this.protocol, "HTTP/1.1\r") != 0)
+            else if (string.Compare(this.protocol, "HTTP/1.1") != 0)
             {
                 statusCode = "500";
                 reasonPhrase = "Internal Server Error";
+                responseBody = "\nWrong protocol, internal server error\n";
             }
             else if (string.Compare(httpVerb, "POST") == 0)
             {
@@ -160,17 +164,19 @@ namespace RestHttpWebService
                 {
                     statusCode = "400";
                     reasonPhrase = "Bad Request";
+                    responseBody = "\nBad request, no resourceID necessary\n";
                 }
                 else if (string.Compare(dirName, "messages") != 0)
                 {
                     statusCode = "404";
                     reasonPhrase = "Not Found";
+                    responseBody = "\nNot Found, wrong ressource name\n";
                 }
                 else
                 {
                     Post();
-                    statusCode = "201";
-                    reasonPhrase = "Created";
+                    statusCode = "200";
+                    reasonPhrase = "OK";
                 }
             }
             else if (string.Compare(httpVerb, "GET") == 0)
@@ -179,6 +185,7 @@ namespace RestHttpWebService
                 {
                     statusCode = "404";
                     reasonPhrase = "Not Found";
+                    responseBody = "\nNot Found, wrong ressource name\n";
                 }
                 else if (string.Compare(resourceID, null) == 0)
                 {
@@ -195,15 +202,17 @@ namespace RestHttpWebService
                 {
                     statusCode = "404";
                     reasonPhrase = "Not Found";
+                    responseBody = "\nBad request, wrong ressource\n";
                 }
                 else if (string.Compare(resourceID, null) == 0)
                 {
                     statusCode = "400";
                     reasonPhrase = "Bad Request";
+                    responseBody = "\nBad request, resourceID necessary\n";
                 }
                 else
                 {
-                    PUT();
+                    Put();
                 }
             }
             else if (string.Compare(httpVerb, "DELETE") == 0)
@@ -212,42 +221,52 @@ namespace RestHttpWebService
                 {
                     statusCode = "404";
                     reasonPhrase = "Not Found";
+                    responseBody = "\nNot Found, wrong ressource name\n";
                 }
                 else if (string.Compare(resourceID, null) == 0)
                 {
                     statusCode = "400";
                     reasonPhrase = "Bad Request";
+                    responseBody = "\nBad request, resourceID necessary\n";
                 }
                 else
                 {
-                    string path = Path.Combine(Environment.CurrentDirectory, dirName);
-                    if (Directory.Exists(path))
-                    {
-                        string filePath = Path.Combine(path, resourceID);
-                        filePath += ".txt";
-                        if (File.Exists(filePath))
-                        {
-                            File.Delete(filePath);
-                            statusCode = "200";
-                            reasonPhrase = "OK";
-                        }
-                        else
-                        {
-                            statusCode = "404";
-                            reasonPhrase = "Not Found";
-                        }
-                    }
-                    else
-                    {
-                        statusCode = "404";
-                        reasonPhrase = "Not Found";
-                    }
+                    Delete();
                 }
             }
-            Console.WriteLine(statusCode + "\n" + reasonPhrase + "\n" + responseID + "\n" + responseBody);
+            //Console.WriteLine(statusCode + "\n" + reasonPhrase + "\n" + responseID + "\n" + responseBody);
         }
 
-        private void PUT()
+        private void Delete()
+        {
+            string path = Path.Combine(Environment.CurrentDirectory, dirName);
+            if (Directory.Exists(path))
+            {
+                string filePath = Path.Combine(path, resourceID);
+                filePath += ".txt";
+                if (File.Exists(filePath))
+                {
+                    File.Delete(filePath);
+                    statusCode = "200";
+                    reasonPhrase = "OK";
+                    responseBody = "\nFile deleted";
+                }
+                else
+                {
+                    statusCode = "404";
+                    reasonPhrase = "Not Found";
+                    responseBody = "\nNot Found, file does not exist";
+                }
+            }
+            else
+            {
+                statusCode = "404";
+                reasonPhrase = "Not Found";
+                responseBody = "\nNot Found, file does not exist";
+            }
+        }
+
+        private void Put()
         {
             string path = Path.Combine(Environment.CurrentDirectory, dirName);
             if (Directory.Exists(path))
@@ -259,17 +278,20 @@ namespace RestHttpWebService
                     File.WriteAllText(filePath, payload);
                     statusCode = "200";
                     reasonPhrase = "OK";
+                    responseBody = "\nFile updated";
                 }
                 else
                 {
                     statusCode = "404";
                     reasonPhrase = "Not Found";
+                    responseBody = "\nNot Found, file does not exist";
                 }
             }
             else
             {
                 statusCode = "404";
                 reasonPhrase = "Not Found";
+                responseBody = "\nNot Found, file does not exist";
             }
         }
 
@@ -283,6 +305,7 @@ namespace RestHttpWebService
                 if (File.Exists(filePath))
                 {
                     responseBody = null;
+                    responseBody += "\n";
                     responseBody += Path.GetFileName(filePath);
                     responseBody += "\n{";
                     responseBody += File.ReadAllText(filePath);
@@ -294,12 +317,14 @@ namespace RestHttpWebService
                 {
                     statusCode = "404";
                     reasonPhrase = "Not Found";
+                    responseBody = "\nNot Found, file does not exist";
                 }
             }
             else
             {
                 statusCode = "404";
                 reasonPhrase = "Not Found";
+                responseBody = "\nNot Found, file does not exist";
             }
         }
 
@@ -313,6 +338,7 @@ namespace RestHttpWebService
                 {
                     string[] filePaths = Directory.GetFiles(path);
                     responseBody = null;
+                    responseBody += "\n";
                     for (int i = 0; i < filePaths.Length; i++)
                     {
                         responseBody += Path.GetFileName(filePaths[i]);
@@ -327,12 +353,14 @@ namespace RestHttpWebService
                 {
                     statusCode = "404";
                     reasonPhrase = "Not Found";
+                    responseBody = "\nNot Found, files do not exist";
                 }
             }
             else
             {
                 statusCode = "404";
                 reasonPhrase = "Not Found";
+                responseBody = "\nNot Found, files do not exist";
             }
         }
 
@@ -345,7 +373,7 @@ namespace RestHttpWebService
             //Console.WriteLine("counter: {0}", counter);
             counter++;
             fileName = counter.ToString();
-            responseID = fileName;
+            responseBody = "\n" + fileName;
             fileName += ".txt";
             string pathFileName = Path.Combine(path, fileName);
             CreateTextFile(pathFileName, counter, fileName, path);
@@ -362,14 +390,28 @@ namespace RestHttpWebService
             }
             else
             {
-                Console.WriteLine("Text File exists already");
+                //Console.WriteLine("Text File exists already");
                 counter++;
                 fileName = counter.ToString();
-                responseID = fileName;
+                responseBody = "\n" + fileName;
                 fileName += ".txt";
                 pathFileName = Path.Combine(path, fileName);
                 CreateTextFile(pathFileName, counter, fileName, path);
             }
+        }
+
+        public string ComposeResponse()
+        {
+            string response;
+            response = $"{protocol} {statusCode} {reasonPhrase}\r\n";
+            response += "Server: Caraba\r\n";
+            response += "Content-Type: text/html\r\n";
+            response += "Accept-Ranges: bytes\r\n";
+            response += $"Content-Length: {responseBody.Length}\r\n";
+            response += "\r\n";
+            response += $"{responseBody}";
+            response += "\r\n\r\n";
+            return response;
         }
     }
 }
