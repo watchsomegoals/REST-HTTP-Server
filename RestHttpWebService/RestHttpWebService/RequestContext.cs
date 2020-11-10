@@ -63,8 +63,17 @@ namespace RestHttpWebService
                         for (int i = 0; i < lines.Length; i++)
                         {
                             if (lines[i] == "")
-                            { 
-                                this.payload = lines[i + 1];
+                            {
+                                int start = Array.IndexOf(lines, "");
+                                start++;
+                                for(int j = start; j < lines.Length; j++)
+                                {
+                                    this.payload += lines[j];
+                                    if (j != lines.Length -1)
+                                    {
+                                        this.payload += "\n";
+                                    }
+                                }
                             }
                         }
                     }

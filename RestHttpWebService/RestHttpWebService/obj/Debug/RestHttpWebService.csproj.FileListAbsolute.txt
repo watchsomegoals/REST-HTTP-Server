@@ -13,4 +13,3 @@ C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\RestHttpWebServi
 C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\RestHttpWebService\bin\Debug\nunit.framework.pdb
 C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\RestHttpWebService\bin\Debug\nunit.framework.xml
 C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\RestHttpWebService\obj\Debug\RestHttpWebService.csproj.CopyComplete
-C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\RestHttpWebService\obj\Debug\RestHttpWebService.csprojAssemblyReference.cache
