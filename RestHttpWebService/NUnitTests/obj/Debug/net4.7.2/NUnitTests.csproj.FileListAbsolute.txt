@@ -13,7 +13,11 @@ C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\bin\D
 C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\obj\Debug\net4.7.2\NUnitTests.csprojAssemblyReference.cache
 C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\obj\Debug\net4.7.2\NUnitTests.AssemblyInfoInputs.cache
 C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\obj\Debug\net4.7.2\NUnitTests.AssemblyInfo.cs
-C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\obj\Debug\net4.7.2\NUnitTests.csproj.CoreCompileInputs.cache
 C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\obj\Debug\net4.7.2\NUnitTests.csproj.CopyComplete
 C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\obj\Debug\net4.7.2\NUnitTests.dll
 C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\obj\Debug\net4.7.2\NUnitTests.pdb
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\bin\Debug\net4.7.2\Castle.Core.dll
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\bin\Debug\net4.7.2\Moq.dll
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\bin\Debug\net4.7.2\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\bin\Debug\net4.7.2\System.Threading.Tasks.Extensions.dll
+C:\Users\Lucian\Desktop\swe\REST-HTTP-Server\RestHttpWebService\NUnitTests\obj\Debug\net4.7.2\NUnitTests.csproj.CoreCompileInputs.cache

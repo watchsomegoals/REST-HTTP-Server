@@ -10,16 +10,16 @@ namespace RestHttpWebService
 {
     public class RequestContext
     {
-        public string httpVerb;
-        public string dirName;
-        public string resourceID;
-        public string protocol;
-        public string payload;
-        public IDictionary<string, string> headerData = new Dictionary<string, string>();
+        private string httpVerb;
+        private string dirName;
+        private string resourceID;
+        private string protocol;
+        private string payload;
+        private IDictionary<string, string> headerData = new Dictionary<string, string>();
 
-        public string statusCode = null;
-        public string reasonPhrase = null;
-        public string responseBody = null;
+        private string statusCode = null;
+        private string reasonPhrase = null;
+        private string responseBody = null;
 
         public RequestContext() { }
 
@@ -198,7 +198,7 @@ namespace RestHttpWebService
             }
         }
 
-        private void Delete()
+        public void Delete()
         {
             string path = Path.Combine(Environment.CurrentDirectory, dirName);
             if (Directory.Exists(path))
@@ -227,7 +227,7 @@ namespace RestHttpWebService
             }
         }
 
-        private void Put()
+        public void Put()
         {
             string path = Path.Combine(Environment.CurrentDirectory, dirName);
             if (Directory.Exists(path))
@@ -256,7 +256,7 @@ namespace RestHttpWebService
             }
         }
 
-        private void GetByID()
+        public void GetByID()
         {
             string path = Path.Combine(Environment.CurrentDirectory, dirName);
             if (Directory.Exists(path))
@@ -289,7 +289,7 @@ namespace RestHttpWebService
             }
         }
 
-        private void GetAll()
+        public void GetAll()
         {
             string path = Path.Combine(Environment.CurrentDirectory, dirName);
             if (Directory.Exists(path))
@@ -340,7 +340,7 @@ namespace RestHttpWebService
             CreateTextFile(pathFileName, counter, fileName, path);
         }
 
-        private void CreateTextFile(string pathFileName, int counter, string fileName, string path)
+        public void CreateTextFile(string pathFileName, int counter, string fileName, string path)
         {
             if (!File.Exists(pathFileName))
             {
@@ -372,6 +372,54 @@ namespace RestHttpWebService
             response += $"{responseBody}";
             response += "\r\n\r\n";
             return response;
+        }
+
+        public string HttpVerb
+        {
+            get { return httpVerb; }
+            set { httpVerb = value; }
+        }
+
+        public string DirName
+        {
+            get { return dirName; }
+            set { dirName = value; }
+        }
+
+        public string ResourceID
+        {
+            get { return resourceID; }
+            set { resourceID = value; }
+        }
+
+        public string Protocol
+        {
+            get { return protocol; }
+            set { protocol = value; }
+        }
+
+        public string Payload
+        {
+            get { return payload; }
+            set { payload = value; }
+        }
+
+        public string StatusCode
+        {
+            get { return statusCode; }
+            set { statusCode = value; }
+        }
+
+        public string ReasonPhrase
+        {
+            get { return reasonPhrase; }
+            set { reasonPhrase = value; }
+        }
+
+        public string ResponseBody
+        {
+            get { return responseBody; }
+            set { responseBody = value; }
         }
     }
 }

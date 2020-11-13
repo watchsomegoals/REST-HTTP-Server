@@ -1,13 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "KC/P/6q3XLISleqEbDTC1bgiN/rxAi8vJoaesBAQtSRHEo8XLmvmI7v4pM44txrh3N7gEL9eKyeFvRUNsuH5Uw==",
+  "dgSpecHash": "P2vjzc4lDxbTGcdAaR+9d9ZG353t9K0Sqglo74xoINOm8ANjbItvNfAtppRc/ebMwRCupbmuVoBw6cY7lx2Fzg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Lucian\\Desktop\\swe\\REST-HTTP-Server\\RestHttpWebService\\NUnitTests\\NUnitTests.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Lucian\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\Lucian\\.nuget\\packages\\microsoft.codecoverage\\16.7.1\\microsoft.codecoverage.16.7.1.nupkg.sha512",
     "C:\\Users\\Lucian\\.nuget\\packages\\microsoft.net.test.sdk\\16.7.1\\microsoft.net.test.sdk.16.7.1.nupkg.sha512",
+    "C:\\Users\\Lucian\\.nuget\\packages\\moq\\4.15.1\\moq.4.15.1.nupkg.sha512",
     "C:\\Users\\Lucian\\.nuget\\packages\\nunit\\3.12.0\\nunit.3.12.0.nupkg.sha512",
-    "C:\\Users\\Lucian\\.nuget\\packages\\nunit3testadapter\\3.17.0\\nunit3testadapter.3.17.0.nupkg.sha512"
+    "C:\\Users\\Lucian\\.nuget\\packages\\nunit3testadapter\\3.17.0\\nunit3testadapter.3.17.0.nupkg.sha512",
+    "C:\\Users\\Lucian\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.0\\system.runtime.compilerservices.unsafe.4.5.0.nupkg.sha512",
+    "C:\\Users\\Lucian\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.1\\system.threading.tasks.extensions.4.5.1.nupkg.sha512"
   ],
   "logs": []
 }
